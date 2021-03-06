@@ -48,7 +48,7 @@ class SendActivedUserEmailService {
         variables: {
           name: user.name,
           token,
-          link: `${process.env.APP_WEB_URL}/actived/?token=${token}`,
+          link: `http://www.fertsolo.com.br/actived/?token=${token}`,
         },
       },
     });
