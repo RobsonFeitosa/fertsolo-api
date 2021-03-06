@@ -35,10 +35,12 @@ class SendContactEmailService {
       'contact.hbs',
     );
 
+    const mailFert = 'contato@fertsolo.com.br';
+
     await this.mailProvider.sendMail({
       to: {
         name,
-        email,
+        email: mailFert,
       },
       subject: `Contato - ${name} - [FertSolo]`,
       templateData: {
@@ -46,6 +48,7 @@ class SendContactEmailService {
         variables: {
           name,
           assunto,
+          email,
           message,
         },
       },
