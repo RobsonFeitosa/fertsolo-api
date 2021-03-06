@@ -51,8 +51,9 @@ class AuthenticateUserService {
 
     if (!user.actived) throw new AppError('User not-actived.', 401);
 
-    if (!passwordMatched)
+    if (!passwordMatched) {
       throw new AppError('Incorrect email/password combination.', 401);
+    }
 
     const { secret, expiresIn } = authConfig.jwt;
 
