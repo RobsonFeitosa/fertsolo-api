@@ -1,0 +1,60 @@
+import { injectable, inject } from 'tsyringe';
+import path from 'path';
+
+import iMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
+import AppError from '@shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
+
+interface IRequest {
+  name: string;
+  email: string;
+  assunto: string;
+  message: string;
+}
+
+@injectable()
+class SendContactEmailService {
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+
+    @inject('MailProvider')
+    private mailProvider: iMailProvider,
+  ) {}
+
+  public async execute({
+    name,
+    email,
+    assunto,
+    message,
+  }: IRequest): Promise<void> {
+    const user = await this.usersRepository.findByEmail(email);
+
+    if (!user) throw new AppError('User does not exists.');
+
+    const contactTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'contact.hbs',
+    );
+
+    await this.mailProvider.sendMail({
+      to: {
+        name,
+        email,
+      },
+      subject: `Contato - ${name} - [FertSolo]`,
+      templateData: {
+        file: contactTemplate,
+        variables: {
+          name,
+          assunto,
+          message,
+        },
+      },
+    });
+  }
+}
+
+export default SendContactEmailService;
