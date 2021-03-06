@@ -28,10 +28,6 @@ class SendContactEmailService {
     assunto,
     message,
   }: IRequest): Promise<void> {
-    const user = await this.usersRepository.findByEmail(email);
-
-    if (!user) throw new AppError('User does not exists.');
-
     const contactTemplate = path.resolve(
       __dirname,
       '..',
