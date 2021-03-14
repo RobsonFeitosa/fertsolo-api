@@ -42,9 +42,9 @@ class IndexLimingPlasteringService {
         '7137cf3f-29ba-413d-ac83-968eb6079f73',
       );
 
-      if (!unitys) {
-        throw new AppError('Unity dos not found');
-      }
+      // if (!unitys) {
+      //   throw new AppError('Unity dos not found');
+      // }
 
       const temp = { ...sample };
 
