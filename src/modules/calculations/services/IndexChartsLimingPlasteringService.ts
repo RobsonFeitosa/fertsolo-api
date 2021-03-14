@@ -7,7 +7,7 @@ interface IPromiseSample {
 }
 
 @injectable()
-class IndexLimingPlasteringService {
+class IndexChartsLimingPlasteringService {
   constructor(
     @inject('LimingPlasteringRepository')
     private limingPlasteringRepository: ILimingPlasteringRepository,
@@ -42,4 +42,4 @@ class IndexLimingPlasteringService {
   }
 }
 
-export default IndexLimingPlasteringService;
+export default IndexChartsLimingPlasteringService;

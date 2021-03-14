@@ -40,6 +40,8 @@ class IndexLimingPlasteringService {
         sample.id,
       );
 
+      console.log(unitys);
+
       if (!unitys) {
         throw new AppError('Unity dos not found');
       }

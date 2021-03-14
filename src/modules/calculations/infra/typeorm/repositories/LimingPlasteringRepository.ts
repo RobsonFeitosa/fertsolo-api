@@ -49,11 +49,11 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
     const total = await builder.getCount();
     if (options.page && options.limit) {
       const data = await builder
-        .skip((options.page - 1) * 9)
+        .skip((options.page - 1) * options.limit)
         .orderBy({
           'report_liming_plastering.created_at': 'DESC',
         })
-        .take(9)
+        .take(options.limit)
         .getMany();
 
       return { total, data };
