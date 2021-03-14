@@ -25,6 +25,9 @@ import UserTokensRepository from '@modules/users/infra/typeorm/repositories/User
 import ILimingPlasteringRepository from '@modules/calculations/repositories/ILimingPlasteringRepository';
 import LimingPlasteringRepository from '@modules/calculations/infra/typeorm/repositories/LimingPlasteringRepository';
 
+import IUnitysLimingPlasteringRepository from '@modules/calculations/repositories/IUnitysLimingPlasteringRepository';
+import UnitysLimingPlasteringRepository from '@modules/calculations/infra/typeorm/repositories/UnitysLimingPlasteringRepository';
+
 import ISettingsRepository from '@modules/settings/repositories/ISettingsRepository';
 import SettingsRepository from '@modules/settings/infra/typeorm/repositories/SettingsRepository';
 
@@ -61,6 +64,11 @@ container.registerSingleton<IUsersTokensRepository>(
 container.registerSingleton<ILimingPlasteringRepository>(
   'LimingPlasteringRepository',
   LimingPlasteringRepository,
+);
+
+container.registerSingleton<IUnitysLimingPlasteringRepository>(
+  'UnitysLimingPlasteringRepository',
+  UnitysLimingPlasteringRepository,
 );
 
 container.registerSingleton<ISettingsRepository>(

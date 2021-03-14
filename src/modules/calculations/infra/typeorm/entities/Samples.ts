@@ -32,61 +32,64 @@ class Sample {
   tb_1_description_deep_culture: string;
 
   @Column()
-  tb_1_clay: string;
+  tb_1_clay: number;
 
   @Column()
-  tb_1_silt: string;
+  tb_1_silt: number;
 
   @Column()
-  tb_1_sand: string;
+  tb_1_sand: number;
 
   @Column()
-  tb_2_m_o: string;
+  tb_2_m_o: number;
 
   @Column()
-  tb_2_ph: string;
+  tb_2_ph: number;
 
   @Column()
-  tb_3_p_fosforo: string;
+  tb_3_p_fosforo: number;
 
   @Column()
-  tb_3_k_potassio: string;
+  tb_3_k_potassio: number;
 
   @Column()
-  tb_3_na_sodio: string;
+  tb_3_na_sodio: number;
 
   @Column()
-  tb_3_s_enxofre: string;
+  tb_3_s_enxofre: number;
 
   @Column()
-  tb_3_b_boro: string;
+  tb_3_b_boro: number;
 
   @Column()
-  tb_3_cu_cobre: string;
+  tb_3_cu_cobre: number;
 
   @Column()
-  tb_3_fe_ferro: string;
+  tb_3_fe_ferro: number;
 
   @Column()
-  tb_3_mn_manganes: string;
+  tb_3_mn_manganes: number;
 
   @Column()
-  tb_3_zn_zinco: string;
+  tb_3_zn_zinco: number;
 
   @Column()
-  tb_4_ca_calcio: string;
+  tb_4_ca_calcio: number;
 
   @Column()
-  tb_4_mg_magnesio: string;
+  tb_4_mg_magnesio: number;
 
   @Column()
-  tb_4_al_aluminio: string;
+  tb_4_al_aluminio: number;
 
   @Column()
-  tb_4_h_al_acidez_potencial: string;
+  tb_4_h_al_acidez_potencial: number;
 
   @Column()
   objective_culture?: string;
+
+  @Column()
+  tb_9_estoque_de_carbono_densidade_solo?: string;
 
   @Column()
   city: string;
@@ -143,6 +146,8 @@ class Sample {
   tb_6_m_saturacao_por_aluminio_interpretation: string;
 
   tb_6_v_saturacao_por_bases_interpretation: string;
+
+  tb_9_estoque_de_carbono?: number;
 
   @CreateDateColumn()
   created_at: Date;

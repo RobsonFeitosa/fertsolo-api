@@ -1,7 +1,7 @@
 import { getRepository, Repository, Brackets, Raw } from 'typeorm';
 
 import ILimingPlasteringRepository from '@modules/calculations/repositories/ILimingPlasteringRepository';
-import ICreateLimingPlasteringDTO from '@modules/calculations/dtos/ICreateLimingPlasteringDTO';
+import { ICreateLimingPlastering } from '@modules/calculations/dtos/ICreateLimingPlasteringDTO';
 
 import IPaginationOptionsDTO from '@modules/dtos/IPaginationOptionsDTO';
 
@@ -30,7 +30,7 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
   }
 
   public async create(
-    dataSamples: ICreateLimingPlasteringDTO[],
+    dataSamples: ICreateLimingPlastering[],
   ): Promise<Samples[]> {
     const limingPlastering = this.ormRepository.create(dataSamples);
 
@@ -49,11 +49,11 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
     const total = await builder.getCount();
     if (options.page && options.limit) {
       const data = await builder
-        .skip((options.page - 1) * options.limit)
+        .skip((options.page - 1) * 9)
         .orderBy({
           'report_liming_plastering.created_at': 'DESC',
         })
-        .take(options.limit)
+        .take(9)
         .getMany();
 
       return { total, data };

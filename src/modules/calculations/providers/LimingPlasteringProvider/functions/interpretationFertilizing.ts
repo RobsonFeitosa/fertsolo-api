@@ -345,7 +345,7 @@ export default function fertilizingFunc({
   interBoro,
   oc,
 }: fertilizingFuncDTO): any {
-  return oc.map(objCulture => {
+  return oc.map((objCulture: any) => {
     const item: Fertilizing = {
       culture_name: objCulture.culture,
     } as Fertilizing;
@@ -411,6 +411,7 @@ export default function fertilizingFunc({
         return {
           ...item,
           ...(objCulture.cultureBefore && {
+            cultureBefore: objCulture.cultureBefore,
             n_nitrogenio: nitrogenioMO({
               mo,
               nitrogenioValues: {

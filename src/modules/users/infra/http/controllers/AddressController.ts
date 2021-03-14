@@ -36,11 +36,11 @@ export default class AddressController {
   }
 
   public async show(req: Request, res: Response): Promise<Response> {
-    const userId = req.user.id;
+    const { addressId } = req.params;
 
     const showAddress = container.resolve(ShowAddressService);
 
-    const address = await showAddress.execute(userId);
+    const address = await showAddress.execute(addressId);
 
     return res.json(address);
   }

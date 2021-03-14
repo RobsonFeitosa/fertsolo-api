@@ -32,12 +32,14 @@ class User {
   level: 1 | 2;
 
   @Column()
+  @Exclude()
   cpf: string;
 
   @Column()
   actived: boolean;
 
   @Column()
+  @Exclude()
   phone_number: string;
 
   isProfessional: boolean;

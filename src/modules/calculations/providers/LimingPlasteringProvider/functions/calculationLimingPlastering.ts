@@ -10,6 +10,66 @@ import {
   ncph6DTO,
 } from '../dtos/FormulaLimingPlastering';
 
+interface IUnity {
+  unity: string;
+  value: number;
+}
+
+function responseDensidadeSolo(value: string): number {
+  switch (value) {
+    case '0.5 a 1.1':
+      return 0.8;
+      break;
+    case '1.2 a 1.5':
+      return 1.35;
+      break;
+    case '1.5 a 1.8':
+      return 1.7;
+      break;
+    case '1.9 a 2.0':
+      return 1.95;
+      break;
+    default:
+      return 0;
+      break;
+  }
+}
+
+function moConvertCot(data: IUnity): number {
+  let res: number;
+
+  switch (data.unity) {
+    case '%':
+      res = (data.value * 10) / 1.724;
+      break;
+    case 'gdm':
+      res = data.value / 1.724;
+      break;
+    default:
+      res = 0;
+      break;
+  }
+
+  return res;
+}
+
+export function cot(data: { mo: IUnity; deep: string; ds: string }): number {
+  const { mo, deep, ds } = data;
+
+  const cotV = moConvertCot(mo);
+
+  const deepValue = deep.split('a ')[1];
+  const deepV = Number(deepValue) / 100;
+
+  const dsV = responseDensidadeSolo(ds);
+
+  const ps1 = dsV * cotV * deepV * 100 * 100;
+
+  const amount = Number((ps1 / 1000).toFixed(2));
+
+  return amount;
+}
+
 export function somaDeBasesCalc(data: somaDeBasesDTO): number {
   const { ca, mg } = data;
 

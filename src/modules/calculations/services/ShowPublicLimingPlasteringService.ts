@@ -10,7 +10,7 @@ import ISamplesResponseDTO from '../dtos/ISamplesResponseDTO';
 import IUnitysLimingPlasteringRepository from '../repositories/IUnitysLimingPlasteringRepository';
 
 @injectable()
-class ShowLimingPlasteringService {
+class ShowPublicLimingPlasteringService {
   constructor(
     @inject('LimingPlasteringRepository')
     private LimingPlasteringRepository: ILimingPlasteringRepository,
@@ -22,8 +22,8 @@ class ShowLimingPlasteringService {
     private sampleCalculationAndInterpretationProvider: ISampleCalculationAndInterpretationProvider,
   ) {}
 
-  public async execute(sample_id: string): Promise<ISamplesResponseDTO> {
-    const report = await this.LimingPlasteringRepository.findById(sample_id);
+  public async execute(sampleId: string): Promise<ISamplesResponseDTO> {
+    const report = await this.LimingPlasteringRepository.findById(sampleId);
 
     if (!report) {
       throw new AppError('Sample does not found');
@@ -118,4 +118,4 @@ class ShowLimingPlasteringService {
   }
 }
 
-export default ShowLimingPlasteringService;
+export default ShowPublicLimingPlasteringService;

@@ -1,6 +1,6 @@
 import ISampleCalculationAndInterpretationProvider from '../models/ISampleCalculationAndInterpretationProvider';
 
-import ICreateLimingPlasteringDTO from '../../../dtos/ICreateLimingPlasteringDTO';
+import { ICreateLimingPlasteringUnitys } from '../../../dtos/ICreateLimingPlasteringDTO';
 import ISamplesResponseDTO from '../../../dtos/ISamplesResponseDTO';
 
 import {
@@ -13,6 +13,7 @@ import {
   ncph7prnt7Calc,
   ngCalc,
   ncph6Calc,
+  cot,
 } from '../functions/calculationLimingPlastering';
 import {
   ClayInter,
@@ -39,21 +40,16 @@ import {
   moConvert,
   naSodio,
   phConvert,
-} from '../utils/kPotassioConvert';
+} from '../utils/convertUnity';
 
-interface IUnityTipes {
-  unity: string;
-  value: number;
-}
-interface ICreateCalculated extends ICreateLimingPlasteringDTO {
-  id: string;
+interface ICalculatedLimingPlastering extends ICreateLimingPlasteringUnitys {
   created_at: Date;
   updated_at: Date;
 }
 
 export default class SampleCalculationAndInterpretationProvider
   implements ISampleCalculationAndInterpretationProvider {
-  public CI(data: ICreateCalculated): ISamplesResponseDTO {
+  public CI(data: ICalculatedLimingPlastering): ISamplesResponseDTO {
     const report: ISamplesResponseDTO = {} as ISamplesResponseDTO;
     report.id = data.id;
     report.user_id = data.user_id;
@@ -61,49 +57,45 @@ export default class SampleCalculationAndInterpretationProvider
     // Entradas
     report.description_cuture = data.description_cuture;
     report.tb_1_description_deep_culture = data.tb_1_description_deep_culture;
-    report.tb_1_clay = JSON.parse(data.tb_1_clay);
-    report.tb_1_silt = JSON.parse(data.tb_1_silt);
-    report.tb_1_sand = JSON.parse(data.tb_1_sand);
-    report.tb_2_m_o = JSON.parse(data.tb_2_m_o);
-    report.tb_2_ph = JSON.parse(data.tb_2_ph);
-    report.tb_3_p_fosforo = JSON.parse(data.tb_3_p_fosforo);
-    report.tb_3_k_potassio = JSON.parse(data.tb_3_k_potassio);
+    report.tb_1_clay = data.tb_1_clay;
+    report.tb_1_silt = data.tb_1_silt;
+    report.tb_1_sand = data.tb_1_sand;
+    report.tb_2_m_o = data.tb_2_m_o;
+    report.tb_2_ph = data.tb_2_ph;
+    report.tb_3_p_fosforo = data.tb_3_p_fosforo;
+    report.tb_3_k_potassio = data.tb_3_k_potassio;
     report.tb_3_na_sodio = data.tb_3_na_sodio
-      ? JSON.parse(data.tb_3_na_sodio)
-      : { unity: null, value: 0 };
-    report.tb_3_s_enxofre = JSON.parse(data.tb_3_s_enxofre);
-    report.tb_3_b_boro = JSON.parse(data.tb_3_b_boro);
-    report.tb_3_cu_cobre = JSON.parse(data.tb_3_cu_cobre);
-    report.tb_3_fe_ferro = JSON.parse(data.tb_3_fe_ferro);
-    report.tb_3_mn_manganes = JSON.parse(data.tb_3_mn_manganes);
-    report.tb_3_zn_zinco = JSON.parse(data.tb_3_zn_zinco);
-    report.tb_4_ca_calcio = JSON.parse(data.tb_4_ca_calcio);
-    report.tb_4_mg_magnesio = JSON.parse(data.tb_4_mg_magnesio);
-    report.tb_4_al_aluminio = JSON.parse(data.tb_4_al_aluminio);
-    report.tb_4_h_al_acidez_potencial = JSON.parse(
-      data.tb_4_h_al_acidez_potencial,
-    );
+      ? data.tb_3_na_sodio
+      : { unity: '', value: 0 };
+    report.tb_3_s_enxofre = data.tb_3_s_enxofre;
+    report.tb_3_b_boro = data.tb_3_b_boro;
+    report.tb_3_cu_cobre = data.tb_3_cu_cobre;
+    report.tb_3_fe_ferro = data.tb_3_fe_ferro;
+    report.tb_3_mn_manganes = data.tb_3_mn_manganes;
+    report.tb_3_zn_zinco = data.tb_3_zn_zinco;
+    report.tb_4_ca_calcio = data.tb_4_ca_calcio;
+    report.tb_4_mg_magnesio = data.tb_4_mg_magnesio;
+    report.tb_4_al_aluminio = data.tb_4_al_aluminio;
+    report.tb_4_h_al_acidez_potencial = data.tb_4_h_al_acidez_potencial;
 
-    const clayObj: IUnityTipes = JSON.parse(String(data.tb_1_clay));
-    const moObj: IUnityTipes = JSON.parse(data.tb_2_m_o);
-    const phcaciObj: IUnityTipes = JSON.parse(data.tb_2_ph);
-    const fosforoObj: IUnityTipes = JSON.parse(data.tb_3_p_fosforo);
-    const potassioObj: IUnityTipes = JSON.parse(data.tb_3_k_potassio);
-    const sodioObj: IUnityTipes = data.tb_3_na_sodio
-      ? JSON.parse(data.tb_3_na_sodio)
-      : {};
-    const enxofreObj: IUnityTipes = JSON.parse(data.tb_3_s_enxofre);
-    const boroObj: IUnityTipes = JSON.parse(data.tb_3_b_boro);
-    const cobreObj: IUnityTipes = JSON.parse(data.tb_3_cu_cobre);
-    const ferroObj: IUnityTipes = JSON.parse(data.tb_3_fe_ferro);
-    const manganesObj: IUnityTipes = JSON.parse(data.tb_3_mn_manganes);
-    const zincoObj: IUnityTipes = JSON.parse(data.tb_3_zn_zinco);
-    const calcioObj: IUnityTipes = JSON.parse(data.tb_4_ca_calcio);
-    const magnesioObj: IUnityTipes = JSON.parse(data.tb_4_mg_magnesio);
-    const aluminioObj: IUnityTipes = JSON.parse(data.tb_4_al_aluminio);
-    const AIObj: IUnityTipes = JSON.parse(
-      String(data.tb_4_h_al_acidez_potencial),
-    );
+    const clayObj = data.tb_1_clay;
+    const moObj = data.tb_2_m_o;
+    const phcaciObj = data.tb_2_ph;
+    const fosforoObj = data.tb_3_p_fosforo;
+    const potassioObj = data.tb_3_k_potassio;
+    const sodioObj = data.tb_3_na_sodio
+      ? data.tb_3_na_sodio
+      : { unity: '', value: 0 };
+    const enxofreObj = data.tb_3_s_enxofre;
+    const boroObj = data.tb_3_b_boro;
+    const cobreObj = data.tb_3_cu_cobre;
+    const ferroObj = data.tb_3_fe_ferro;
+    const manganesObj = data.tb_3_mn_manganes;
+    const zincoObj = data.tb_3_zn_zinco;
+    const calcioObj = data.tb_4_ca_calcio;
+    const magnesioObj = data.tb_4_mg_magnesio;
+    const aluminioObj = data.tb_4_al_aluminio;
+    const AIObj = data.tb_4_h_al_acidez_potencial;
 
     // Calculos e Interpretações
     report.tb_1_solo_classe = ClayInter(clayObj.value / 10);
@@ -221,10 +213,25 @@ export default class SampleCalculationAndInterpretationProvider
       k: convertCmol(potassioObj),
     });
 
-    const objCulture = JSON.parse(String(data.objective_culture));
-    report.objective_culture = objCulture;
+    report.tb_9_estoque_de_carbono_densidade_solo =
+      data.tb_9_estoque_de_carbono_densidade_solo;
+
+    if (report.tb_9_estoque_de_carbono_densidade_solo) {
+      report.tb_9_estoque_de_carbono = cot({
+        mo: moObj,
+        ds: report.tb_9_estoque_de_carbono_densidade_solo,
+        deep: report.tb_1_description_deep_culture,
+      });
+    }
+
+    report.objective_culture = data.objective_culture;
 
     if (data.objective_culture) {
+      const ocOb =
+        typeof data.objective_culture === 'string'
+          ? JSON.parse(data.objective_culture)
+          : data.objective_culture;
+
       const calculateFertilizing = {
         interFosforo: pFosforoMelichInter(fosforoObj.value),
         interPotassio: kPotassioInter({
@@ -233,7 +240,7 @@ export default class SampleCalculationAndInterpretationProvider
         }),
         interZinco: report.tb_3_zn_zinco_interpretation,
         interBoro: report.tb_3_b_boro_interpretation,
-        oc: objCulture,
+        oc: ocOb,
         mo: moObj.value,
       };
       const fertilizing = fertilizingFunc(calculateFertilizing);

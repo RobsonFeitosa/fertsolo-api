@@ -1,5 +1,5 @@
 import Samples from '../infra/typeorm/entities/Samples';
-import ICreateLimingPlasteringDTO from '../dtos/ICreateLimingPlasteringDTO';
+import { ICreateLimingPlastering } from '../dtos/ICreateLimingPlasteringDTO';
 import IPaginationOptionsDTO from '../../dtos/IPaginationOptionsDTO';
 
 interface IFindAllLimingPlastering {
@@ -18,7 +18,7 @@ interface IFindAllOfUserLimingPlastering extends IPaginationOptionsDTO {
 }
 
 export default interface ILimingPlasteringResitory {
-  create(dataSamples: ICreateLimingPlasteringDTO[]): Promise<Samples[]>;
+  create(dataSamples: ICreateLimingPlastering[]): Promise<Samples[]>;
   findAndCount(
     options: IPaginationOptionsDTO,
   ): Promise<IFindAllLimingPlastering>;

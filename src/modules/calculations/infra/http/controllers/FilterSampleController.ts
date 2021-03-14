@@ -9,6 +9,7 @@ import IndexPhLimingPlasteringService from '@modules/calculations/services/Index
 import IndexChartsLimingPlasteringService from '@modules/calculations/services/IndexChartsLimingPlasteringService';
 import IndexCountLimingPlasteringService from '@modules/calculations/services/IndexCountLimingPlasteringService';
 import IndexLimitLimingPlasteringService from '@modules/calculations/services/IndexLimitLimingPlasteringService';
+import ShowPublicLimingPlasteringService from '@modules/calculations/services/ShowPublicLimingPlasteringService';
 
 export default class CalculationsController {
   public async indexAll(req: Request, res: Response): Promise<Response> {
@@ -22,6 +23,16 @@ export default class CalculationsController {
     });
 
     return res.json(classToClass(samples));
+  }
+
+  public async showPublic(req: Request, res: Response): Promise<Response> {
+    const { sampleId } = req.params;
+
+    const sampleShow = container.resolve(ShowPublicLimingPlasteringService);
+
+    const sample = await sampleShow.execute(sampleId);
+
+    return res.json(classToClass(sample));
   }
 
   public async show(req: Request, res: Response): Promise<Response> {

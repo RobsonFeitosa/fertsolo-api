@@ -8,6 +8,8 @@ const calculationRouter = Router();
 const samplesController = new SamplesController();
 const filterSampleController = new FilterSampleController();
 
+calculationRouter.get('/id/:sampleId', filterSampleController.showPublic);
+
 calculationRouter.use(ensureAuthenticated);
 
 calculationRouter.get('/all', filterSampleController.indexAll);
