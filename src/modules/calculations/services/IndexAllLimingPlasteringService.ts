@@ -35,12 +35,12 @@ class IndexLimingPlasteringService {
       options,
     );
 
+    console.log(dataSamples);
+
     const reportsPromise = dataSamples.data.map(async (sample: Sample) => {
       const unitys = await this.unitysLimingPlasteringRepository.findByIdReport(
-        sample.id,
+        '7137cf3f-29ba-413d-ac83-968eb6079f73',
       );
-
-      console.log(unitys);
 
       if (!unitys) {
         throw new AppError('Unity dos not found');
