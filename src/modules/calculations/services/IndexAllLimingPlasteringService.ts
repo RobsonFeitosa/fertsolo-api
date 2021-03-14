@@ -39,7 +39,7 @@ class IndexLimingPlasteringService {
 
     const reportsPromise = dataSamples.data.map(async (sample: Sample) => {
       const unitys = await this.unitysLimingPlasteringRepository.findByIdReport(
-        sample.id,
+        '7137cf3f-29ba-413d-ac83-968eb6079f73',
       );
 
       if (!unitys) {
