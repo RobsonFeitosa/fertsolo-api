@@ -20,7 +20,7 @@ interface IFindAllOfUserLimingPlastering extends IPaginationOptionsDTO {
 export default interface ILimingPlasteringResitory {
   create(dataSamples: ICreateLimingPlastering[]): Promise<Samples[]>;
   findAndCount(
-    options: IPaginationOptionsDTO,
+    options: IFindAllOfUserLimingPlastering,
   ): Promise<IFindAllLimingPlastering>;
   findChart(): Promise<Samples[]>;
   findCount(): Promise<number>;
@@ -28,9 +28,7 @@ export default interface ILimingPlasteringResitory {
   findById(id: string): Promise<Samples | undefined>;
   findByIdSort(searchTermId: string): Promise<Samples | undefined>;
   findPh(options: IFindFilter): Promise<IFindAllLimingPlastering>;
-  findAll(
-    options: IFindAllOfUserLimingPlastering,
-  ): Promise<IFindAllLimingPlastering>;
+  findAll(options: IPaginationOptionsDTO): Promise<IFindAllLimingPlastering>;
   delete(id: string): Promise<void>;
   save(dataSamples: Samples[]): Promise<Samples[]>;
 }

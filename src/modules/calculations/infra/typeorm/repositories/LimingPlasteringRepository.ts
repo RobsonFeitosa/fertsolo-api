@@ -40,13 +40,18 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
   }
 
   public async findAndCount(
-    options: IPaginationOptionsDTO,
+    options: IFindAllOfUserLimingPlastering,
   ): Promise<IFindAllLimingPlastering> {
     const builder = this.ormRepository.createQueryBuilder(
       'report_liming_plastering',
     );
 
-    const total = await builder.getCount();
+    const total = await builder
+      .where('report_liming_plastering.user_id = :user_id', {
+        user_id: options.user_id,
+      })
+      .getCount();
+
     if (options.page && options.limit) {
       const data = await builder
         .skip((options.page - 1) * options.limit)
@@ -54,6 +59,9 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
           'report_liming_plastering.created_at': 'DESC',
         })
         .take(options.limit)
+        .where('report_liming_plastering.user_id = :user_id', {
+          user_id: options.user_id,
+        })
         .getMany();
 
       return { total, data };
@@ -84,17 +92,13 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
   }
 
   public async findAll(
-    options: IFindAllOfUserLimingPlastering,
+    options: IPaginationOptionsDTO,
   ): Promise<IFindAllLimingPlastering> {
     const builder = this.ormRepository.createQueryBuilder(
       'report_liming_plastering',
     );
 
-    const total = await builder
-      .where('report_liming_plastering.user_id = :user_id', {
-        user_id: options.user_id,
-      })
-      .getCount();
+    const total = await builder.getCount();
 
     if (options.page && options.limit) {
       const data = await builder
@@ -103,9 +107,6 @@ class LimingPlasteringRepository implements ILimingPlasteringRepository {
           'report_liming_plastering.created_at': 'DESC',
         })
         .take(options.limit)
-        .where('report_liming_plastering.user_id = :user_id', {
-          user_id: options.user_id,
-        })
         .getMany();
 
       return { total, data };

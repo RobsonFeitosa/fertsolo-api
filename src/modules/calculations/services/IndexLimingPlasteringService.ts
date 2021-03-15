@@ -35,7 +35,9 @@ class IndexLimingPlasteringService {
   public async execute(
     options: IFindAllOfUserLimingPlastering,
   ): Promise<IPromiseSample> {
-    const dataSamples = await this.limingPlasteringRepository.findAll(options);
+    const dataSamples = await this.limingPlasteringRepository.findAndCount(
+      options,
+    );
 
     const reportsPromise = dataSamples.data.map(async (sample: Samples) => {
       const unitys = await this.unitysLimingPlasteringRepository.findByIdReport(
