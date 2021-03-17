@@ -9,7 +9,7 @@ const addressController = new AddressController();
 addressRouter.use(ensureAuthenticated);
 
 addressRouter.post('/', addressController.create);
-addressRouter.get('/:addressId', addressController.show);
+addressRouter.get('/', addressController.show);
 addressRouter.put('/:addressId', addressController.update);
 
 export default addressRouter;
