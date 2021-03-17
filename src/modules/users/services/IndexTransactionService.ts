@@ -26,14 +26,12 @@ class IndexTransactionService {
       api_key: process.env.PAGARME_API_KEY,
     });
 
-    const transf = await client.transactions.all({ count: 100000 });
-
     const transactions = await client.transactions.all({
       count: options.limit,
       page: options.page,
     });
 
-    return { total: transf.length, data: transactions };
+    return { total: transactions.length, data: transactions };
   }
 }
 
