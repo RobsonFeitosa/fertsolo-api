@@ -14,7 +14,6 @@ class ShowAddressService {
   ) {}
 
   public async execute(userId: string): Promise<Address> {
-    console.log(userId);
     const address = await this.addressRepository.findByIdUser(userId);
 
     if (!address) throw new AppError('Address not found');
