@@ -72,4 +72,17 @@ export default class AddressController {
 
     return res.json(address);
   }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    // const { page = 1, limit } = request.query;
+
+    // const indexUser = container.resolve(IndexUsersService);
+
+    // const users = await indexUser.execute({
+    //   page: Number(page),
+    //   limit: Number(limit),
+    // });
+
+    return response.json({ ok: true });
+  }
 }

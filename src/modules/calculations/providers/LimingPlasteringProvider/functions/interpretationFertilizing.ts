@@ -136,6 +136,7 @@ function nitrogenioMO({
           break;
       }
     };
+
     switch (!!mo) {
       case mo <= 2.5:
         return callbackNitrogenio(0);
@@ -410,12 +411,12 @@ export default function fertilizingFunc({
       case MILHO:
         return {
           ...item,
-          ...(objCulture.cultureBefore && {
-            cultureBefore: objCulture.cultureBefore,
+          ...(objCulture.objective_culture_before_milho && {
+            cultureBefore: objCulture.objective_culture_before_milho,
             n_nitrogenio: nitrogenioMO({
               mo,
               nitrogenioValues: {
-                property: objCulture.cultureBefore,
+                property: objCulture.objective_culture_before_milho,
                 properties: [LEGUMINOSA, CONSORCIO_OU_POUSIO, GRAMINEA],
                 values: {
                   0: ['70', '50', '30'],
