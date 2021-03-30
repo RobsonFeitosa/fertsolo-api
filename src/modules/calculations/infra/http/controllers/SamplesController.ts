@@ -53,14 +53,14 @@ export default class CalculationsController {
     return res.json(response);
   }
 
-  public async delete(request: Request, response: Response): Promise<any> {
-    const { sampleId } = request.params;
+  public async delete(req: Request, res: Response): Promise<any> {
+    const { sampleId } = req.params;
 
     const removeLiming = container.resolve(RemoveLimingPlasteringService);
 
     await removeLiming.execute(sampleId);
 
-    return response.status(204).send();
+    return res.status(204).send();
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
