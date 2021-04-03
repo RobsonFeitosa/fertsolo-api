@@ -34,7 +34,6 @@ class CreateTransactionService {
       card = await this.creditCardRepository.findByCardId(card_id);
     }
 
-
     const client = await pagarme.client.connect({
       api_key: process.env.PAGARME_API_KEY,
     });
