@@ -22,6 +22,8 @@ app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 app.use(errors());
+console.log('process.env.PAGARME_API_KEY');
+console.log(process.env.PAGARME_API_KEY);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
