@@ -23,9 +23,9 @@ class CreateTransactionService {
   ) {}
 
   public async execute({ user_id, transaction }: IRequest): Promise<IRequest> {
-    const user = await this.usersRepository.findById(user_id);
+    const userr = await this.usersRepository.findById(user_id);
 
-    if (!user) throw new AppError('User not found');
+    if (!userr) throw new AppError('User not found');
 
     const { card_hash, card_id } = transaction;
 
