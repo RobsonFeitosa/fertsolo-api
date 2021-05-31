@@ -43,6 +43,8 @@ class CreateTransactionService {
       ...(card_hash ? { card_hash } : { card_id: card?.card_id }),
     });
 
+    console.log(pagarmeTransaction);
+
     return { transaction: pagarmeTransaction, user_id: user.id };
   }
 }
