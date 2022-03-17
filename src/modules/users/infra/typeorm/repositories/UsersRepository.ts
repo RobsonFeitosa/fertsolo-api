@@ -56,6 +56,7 @@ class UsersRepository implements IUsersRepository {
 
       return { total, data };
     }
+
     const data = await builder.getMany();
 
     return { total, data };
